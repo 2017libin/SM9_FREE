@@ -576,6 +576,7 @@ BOOL fast_pairing(_MIPD_ ecn2 *P,zzn Qx,zzn Qy,big x,zzn2 *X,zzn12 *res)
 //
 // ecap(.) function
 //
+#include <time.h>
 
 BOOL ecap(_MIPD_ ecn2 *P,ecn *Q,big x,zzn2 *X,zzn12 *r)
 {
@@ -606,6 +607,14 @@ BOOL ecap(_MIPD_ ecn2 *P,ecn *Q,big x,zzn2 *X,zzn12 *r)
     nres(_MIPP_ yy, Qy);
     
 
+    double start, end, count=1000;
+    start = clock();
+    for (size_t i = 0; i < count; i++)
+    {
+        fast_pairing(_MIPP_ P, Qx, Qy, x, X, r);
+    }
+    end = clock();
+    printf("pairing %f, total time %f, per time %f\n", count, (end-start)/CLOCKS_PER_SEC, (end-start)/count/CLOCKS_PER_SEC);
 
     Ok = fast_pairing(_MIPP_ P, Qx, Qy, x, X, r);
     
