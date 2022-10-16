@@ -606,7 +606,10 @@ BOOL ecap(_MIPD_ ecn2 *P,ecn *Q,big x,zzn2 *X,zzn12 *r)
     nres(_MIPP_ xx, Qx);
     nres(_MIPP_ yy, Qy);
     
-
+    
+    Ok = fast_pairing(_MIPP_ P, Qx, Qy, x, X, r);
+    
+#if 0
     double start, end, count=1000;
     start = clock();
     for (size_t i = 0; i < count; i++)
@@ -615,8 +618,8 @@ BOOL ecap(_MIPD_ ecn2 *P,ecn *Q,big x,zzn2 *X,zzn12 *r)
     }
     end = clock();
     printf("pairing %f, total time %f, per time %f\n", count, (end-start)/CLOCKS_PER_SEC, (end-start)/count/CLOCKS_PER_SEC);
-
-    Ok = fast_pairing(_MIPP_ P, Qx, Qy, x, X, r);
+#endif
+    
     
     
     mirkill(xx);

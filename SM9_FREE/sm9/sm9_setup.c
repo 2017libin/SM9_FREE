@@ -351,7 +351,9 @@ unsigned char* SM9_Set_Sign(unsigned char* x1, unsigned char* x2, unsigned char*
     if(gGtchar == NULL){
         sm9sign = ecap(_MIPP_ &ppG2, &p1G1, sm9t, &sm9X, &gGt);
         gc = (unsigned char*)malloc(sizeof(unsigned char)*(12*sm9len));
-        zzn12_tochar(_MIPP_ &gGt, gc,sm9len);
+        zzn12_tochar(_MIPP_ &gGt, gc, sm9len);
+        printf("g:\n");
+        print_hex(gc, 12*sm9len);  // 打印预计算的g
     }else{
         zzn12_fromchar(_MIPP_ &gGt, gGtchar,sm9len);
         sm9sign = TRUE;
